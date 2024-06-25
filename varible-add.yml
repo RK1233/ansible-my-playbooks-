@@ -1,0 +1,10 @@
+--- #varible action creation
+- hosts: all
+  become: yes
+
+  vars:
+    pkgname: httpd
+
+  tasks:
+    - name: installing httpd by using variable action
+      action: yum name='{{pkgname}}' state=latest

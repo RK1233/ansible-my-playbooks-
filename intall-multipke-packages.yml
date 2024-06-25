@@ -1,0 +1,13 @@
+--- #
+- name: install loop packages
+  hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks:
+    - name: install packages
+      yum:
+        name: ['git','which','docker','tree','wget','mysql','httpd','java']
+        state: installed
+

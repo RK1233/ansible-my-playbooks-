@@ -1,0 +1,13 @@
+--- # removing package
+- name: removing package 
+  hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks:
+    - name: removing the docker software from servers
+      yum:
+        name: docker
+        state: absent
+

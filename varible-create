@@ -1,0 +1,10 @@
+--- #variable action
+- hosts: all
+  become: yes
+
+  var:
+    user: sunny
+
+  tasks:
+    -name: addig user
+     user: {{user}} 

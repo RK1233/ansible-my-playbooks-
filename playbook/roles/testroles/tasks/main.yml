@@ -1,0 +1,2 @@
+- name: installing httod into hosts
+  yum: pkg=httpd state=latest

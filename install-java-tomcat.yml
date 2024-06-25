@@ -1,0 +1,42 @@
+---
+- name: install java & tomcat
+  hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks:
+    - name: install java package on RedHat
+      yum:
+        name: java
+        state: installed
+      when: ansible_os_family == "RedHat"
+
+    - name: install java package on Debian
+      ansible.builtin.apt:
+        name: default-jdk
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: download tomcat software
+      ansible.builtin.get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.25/bin/apache-tomcat-10.1.25.tar.gz
+        dest: /opt
+        
+    - name: extract tomcat file
+      unarchive:
+        src: /opt/apache-tomcat-10.1.25.tar.gz
+        dest: /opt
+        remote_src: yes
+
+    - name: provide executable permissions
+      file:
+        path: /opt/apache-tomcat-10.1.25/bin/*.sh
+        mode: u+x
+        recurse: yes
+
+    - name: start tomcat service
+      shell: nohup ./startup.sh &
+      args:
+        chdir: /opt/apache-tomcat-10.1.25/bin
+

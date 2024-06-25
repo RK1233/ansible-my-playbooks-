@@ -1,0 +1,8 @@
+--- # this is for demo playbook
+- hosts: all
+  tasks:
+    -name: installing httpd on all webservers
+     action: yum pkg=httpd state=installed
+
+    -name: installing phython on all webservers
+     action: yum pkg=phyton state=installed   

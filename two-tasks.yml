@@ -1,0 +1,19 @@
+--- # two tasks playbook
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks:
+    - name: installing httpd package
+      yum:
+        name: httpd
+        state: latest
+
+
+
+
+    - name: start httpd service
+      service:
+        name: httpd
+        state: started

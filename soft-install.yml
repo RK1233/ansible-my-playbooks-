@@ -1,0 +1,12 @@
+--- # software installation
+- name:  installing software in servers
+  hosts: all 
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks: 
+    - name: installing docker sofware in servers
+      yum: 
+       name: docker
+       state: installed

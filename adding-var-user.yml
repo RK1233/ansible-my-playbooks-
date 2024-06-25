@@ -1,0 +1,17 @@
+---
+- name: creating user by calling from another file
+  hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+
+  vars_files:
+    - user.yml
+
+  tasks:
+    - name: creating user {{ user1 }}
+      ansible.builtin.user:
+        name: "{{ user1 }}"
+        state: present
+        createhome: yes
+
